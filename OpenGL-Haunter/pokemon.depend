@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1486224515 source:y:\year 2 sem 2\tcs2221\assignment\computer-graphic-haunter-master\haunter.cpp
+	<glut.h>
+	<string>
+	<fstream>
+	<math.h>
+	"haunter.hpp"
+
+1486224826 y:\year 2 sem 2\tcs2221\assignment\computer-graphic-haunter-master\haunter.hpp
+	"main.hpp"
+
+1486225018 y:\year 2 sem 2\tcs2221\assignment\computer-graphic-haunter-master\main.hpp
+	<string>
+	<cmath>
+	<iostream>
+	<glut.h>
+	<time.h>
+
+1486224809 source:y:\year 2 sem 2\tcs2221\assignment\computer-graphic-haunter-master\main.cpp
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	<cmath>
+	<glut.h>
+	"main.hpp"
+	"haunter.hpp"
+
+1486224515 source:y:\year 2 sem 2\tcs2221\assignment\opengl-haunter\haunter.cpp
+	<glut.h>
+	<string>
+	<fstream>
+	<math.h>
+	"haunter.hpp"
+
+1486224826 y:\year 2 sem 2\tcs2221\assignment\opengl-haunter\haunter.hpp
+	"main.hpp"
+
+1486225034 y:\year 2 sem 2\tcs2221\assignment\opengl-haunter\main.hpp
+	<string>
+	<cmath>
+	<iostream>
+	<glut.h>
+	<time.h>
+
+1486225905 source:y:\year 2 sem 2\tcs2221\assignment\opengl-haunter\main.cpp
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	<cmath>
+	<glut.h>
+	"main.hpp"
+	"haunter.hpp"
+
