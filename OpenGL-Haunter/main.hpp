@@ -3,7 +3,7 @@
 #include <string>
 #include <cmath>
 #include <iostream>
-#include <glut.h>
+#include <GL\glut.h>
 #include<time.h>
 using namespace std;
 
@@ -29,7 +29,6 @@ static GLfloat myblue[]    = { 0.0f, 0.0f, 1.0f, 1.0f };
 static GLfloat mycyan[]    = { 0.0f, 1.0f, 1.0f, 1.0f };
 static GLfloat mymagenta[] = { 1.0f, 0.0f, 1.0f, 1.0f };
 static GLfloat myyellow[]  = { 1.0f, 1.0f, 0.0f, 1.0f };
-
 static GLfloat mygray10Percent[] = { 0.1f, 0.1f, 0.1f, 1.0f };
 static GLfloat mygray20Percent[] = { 0.2f, 0.2f, 0.2f, 1.0f };
 static GLfloat mygray30Percent[] = { 0.3f, 0.3f, 0.3f, 1.0f };
@@ -216,29 +215,66 @@ class Skill
          {
             glDisable(GL_CULL_FACE);
 
-           float timer = clock()/CLOCKS_PER_SEC;
+            //set speed for shadow ball
+            float timer = (clock()/CLOCKS_PER_SEC)%15; //for repetition
+
+            //set the position of light source
+            static GLfloat position[] = {0.0f, 0.0f, 0.0f, 1.0f};
 
             if (timer < 5)
             {
                 glPushMatrix();
                 glTranslatef(0.0f, 0.0f, 20.0f);
+                glScalef(timer*0.15, timer*0.15, timer*0.15);
                 glColor3f(0.53f,0.12f, 0.47f );
                 glScalef(timer*0.15, timer*0.15, timer*0.15);
-                glutSolidSphere(10, 20, 20);
+
+                //set up color
+                static GLfloat mypurple[]  = { 0.3f, 0.0f, 0.3f, 1.0f };
+                //set up spotlight
+                glLightfv(GL_LIGHT0, GL_AMBIENT, mypurple);
+                glLightfv(GL_LIGHT0, GL_DIFFUSE, mypurple);
+                glLightfv(GL_LIGHT0, GL_SPECULAR, mypurple);
+                glLightf (GL_LIGHT0, GL_SPOT_CUTOFF, 35);
+                glLightf (GL_LIGHT0, GL_SPOT_EXPONENT, 2.0);
+                glLightf (GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
+                glLightf (GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.04);
+                glEnable(GL_LIGHT0);
+                //draw object
+                glutSolidSphere(9, 20, 20);
+                glLightfv(GL_LIGHT0, GL_POSITION, position);
+
                 glPopMatrix();
             }
 
-            else if (timer >= 5 && timer <= 10)
+            else if (timer >= 5 && timer <= 15)
             {
                 glPushMatrix();
                 glTranslatef(0.0f, 0.0f, 20.0f);
                 glColor3f(0.53f,0.12f, 0.47f );
                 glScalef(0.75,0.75,0.75);
                 glTranslatef(0,0,(timer-5)*10);
-                glutSolidSphere(10, 20, 20);
+
+                //set up color
+                static GLfloat mypurple[]  = { 0.3f, 0.0f, 0.3f, 1.0f };
+                //set up spotlight
+                glLightfv(GL_LIGHT0, GL_AMBIENT, mypurple);
+                glLightfv(GL_LIGHT0, GL_DIFFUSE, mypurple);
+                glLightfv(GL_LIGHT0, GL_SPECULAR, mypurple);
+                glLightf (GL_LIGHT0, GL_SPOT_CUTOFF, 35);
+                glLightf (GL_LIGHT0, GL_SPOT_EXPONENT, 2.0);
+                glLightf (GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
+                glLightf (GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.04);
+                glEnable(GL_LIGHT0);
+                //draw object
+                glutSolidSphere(9, 20, 20);
+                glLightfv(GL_LIGHT0, GL_POSITION, position);
+
                 glPopMatrix();
             }
+            glEnable(GL_CULL_FACE);
          }
+
         }
 
         void toggle()

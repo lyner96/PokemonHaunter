@@ -10,6 +10,18 @@ class ForceField
         void draw();
 };
 
+class GrassField
+{
+        public:
+        void draw();
+};
+
+class Moon
+{
+        public:
+        void draw();
+};
+
 class HaunterFace
 {
     public:
@@ -30,27 +42,21 @@ class HauntedHouse
 {
 public :
     ForceField field;
+    GrassField rumput;
     HaunterFace haunterFace;
     Haunter_Hand haunterHand;
+    Moon moon;
 
 public:
     void draw(){
         field.draw();
+        rumput.draw();
+        moon.draw();
         haunterFace.drawLeftEyes();
 		haunterFace.drawRightEyes();
         haunterFace.drawFace();
         haunterFace.drawMouth();
         haunterHand.draw();
-    }
-
-    void tickTime()
-    {
-
-    }
-
-    void init()
-    {
-
     }
 
 };

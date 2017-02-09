@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-#include <glut.h>
+#include <GL\glut.h>
 #include "main.hpp"
 #include "haunter.hpp"
 
@@ -41,7 +41,6 @@ void myDisplayFunc(void)
  glFlush();   // send any buffered output to be rendered
  glutSwapBuffers();
 
- myvirtualworld.tickTime(); //tick the clock
  glutPostRedisplay();//force openGL to call myDisplayFunc() again
 }
 
@@ -267,8 +266,6 @@ void myInit()
  myViewingInit();
 
  myLightingInit();
-
- myvirtualworld.init();
 }
 
 void myWelcome()

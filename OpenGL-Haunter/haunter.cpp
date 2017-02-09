@@ -1,4 +1,4 @@
-#include <glut.h>
+#include <GL\glut.h>
 #include <string>
 #include <fstream>
 #include <math.h>
@@ -9,21 +9,62 @@ using namespace haunter;
 void ForceField::draw()
 {
     glPointSize(1.0);
-    srand(1); //* fixed random seed, thus
-    // the point are fixed
-    //* comment this out to get
-    // 'force field' effect
+    srand(1);
     glColor3f(1.0f, 1.0f, 1.0f);
     GLfloat x,y,z;
     glBegin(GL_POINTS);
     for (int i=0; i<1000; ++i)
     {
-    x = (rand()%10000)/10000.0 * 40.0 - 20.0;
-    y = (rand()%10000)/10000.0 * 40.0 - 20.0;
-    z = (rand()%10000)/10000.0 * 40.0 - 20.0;
+    x = (rand()%10000)/10000.0 * 80.0 - 40.0;
+    y = (rand()%10000)/10000.0 * 80.0 - 30.0;
+    z = (rand()%10000)/10000.0 * 80.0 - 40.0;
     glVertex3f(x,y,z);
     }
     glEnd();
+}
+
+void GrassField::draw()
+{
+    glPushMatrix();
+    for(int i=0;i<3600;i++)
+    {
+    glBegin(GL_TRIANGLES);
+    glColor3f(0.0,1.0,0.0);
+	glVertex3f(0.0,-35.0,0.0);
+	glVertex3f(20.0,-35,-25.0);
+	glVertex3f(-20.0,-35,-25.0);
+	glEnd();
+    glRotatef(0.1f, 0.0f, 1.0f,0.0f);
+    }
+    glPopMatrix();
+}
+
+void Moon::draw()
+{
+    glPushMatrix();
+    glDisable(GL_CULL_FACE);
+    glColor3f(1.0,1.0,0.0);
+    glTranslatef(-40.0,60.0,0.0);
+
+    //set up color
+    static GLfloat mywhite[]  = { 0.3f, 0.3f, 0.3f, 1.0f };
+    //set up spotlight
+    glLightfv(GL_LIGHT3, GL_AMBIENT, mywhite);
+    glLightfv(GL_LIGHT3, GL_DIFFUSE, mywhite);
+    glLightfv(GL_LIGHT3, GL_SPECULAR, mywhite);
+    glLightf (GL_LIGHT3, GL_SPOT_CUTOFF, 35);
+    glLightf (GL_LIGHT3, GL_SPOT_EXPONENT, 2.0);
+    glLightf (GL_LIGHT3, GL_CONSTANT_ATTENUATION, 1.0);
+    glLightf (GL_LIGHT3, GL_LINEAR_ATTENUATION, 0.04);
+    glEnable(GL_LIGHT3);
+    //set up position
+    static GLfloat position[] = {-40.0f, 60.0f, 0.0f, 1.0f };
+    //draw object
+    glutSolidSphere(7,50,50);   //Display Moon as a solid object
+    glLightfv(GL_LIGHT1, GL_POSITION, position);
+
+    glEnable(GL_CULL_FACE);
+    glPopMatrix();
 }
 
 void HaunterFace::drawFace()
@@ -31,7 +72,7 @@ void HaunterFace::drawFace()
     glDisable(GL_CULL_FACE);
 
     const float Deg2Rad = 3.14159/180 ;// convert degree into Rad
-    //glBegin();
+
     glColor3f(0.5,0.0,0.75);
     GLUquadricObj *sphere;
     sphere = gluNewQuadric();
@@ -40,18 +81,10 @@ void HaunterFace::drawFace()
     gluQuadricOrientation( sphere, GLU_OUTSIDE);
     gluQuadricTexture( sphere, GL_TRUE);
     gluSphere( sphere, 12, 16, 16);
-	//glEnd();
 
 	//Try to use pytamid for the bottom spike
 	glBegin(GL_POLYGON);
 	glPolygonMode(GL_FRONT,GL_FILL);
-	/*glColor3f(1,1,1);
-	glVertex3f(30,-15,-8);
-	glVertex3f(-30,-15,-8);
-	glVertex3f(30,-15,8);
-	glVertex3f(-30,-15,8);
-	glEnd();
-*/
 
 	glBegin(GL_TRIANGLES);
 	//glColor3f(1.0,1.0,0.0); //this is for testing usage
