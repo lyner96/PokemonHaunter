@@ -36,12 +36,12 @@ void myDisplayFunc(void)
     skill.draw();
     myvirtualworld.draw();
 
- glPopMatrix();
+     glPopMatrix();
 
- glFlush();   // send any buffered output to be rendered
- glutSwapBuffers();
+     glFlush();   // send any buffered output to be rendered
+     glutSwapBuffers();
 
- glutPostRedisplay();//force openGL to call myDisplayFunc() again
+     glutPostRedisplay();//force openGL to call myDisplayFunc() again
 }
 
 void myReshapeFunc(int width, int height)
@@ -53,24 +53,24 @@ void myReshapeFunc(int width, int height)
 
 void myKeyboardFunc(unsigned char key, int x, int y)
 {
- GLfloat xinc,yinc,zinc;
- xinc = yinc = zinc = 0.0;
- switch (key)
- {
-    case 'a': case 'A': xinc = -setting.posInc;  break;
-    case 'd': case 'D': xinc =  setting.posInc;  break;
-    case 'q': case 'Q': yinc = -setting.posInc;  break;
-    case 'e': case 'E': yinc =  setting.posInc;  break;
-    case 'w': case 'W': zinc = -setting.posInc;  break;
-    case 's': case 'S': zinc =  setting.posInc;  break;
+     GLfloat xinc,yinc,zinc;
+     xinc = yinc = zinc = 0.0;
+     switch (key)
+     {
+        case 'a': case 'A': xinc = -setting.posInc;  break;
+        case 'd': case 'D': xinc =  setting.posInc;  break;
+        case 'q': case 'Q': yinc = -setting.posInc;  break;
+        case 'e': case 'E': yinc =  setting.posInc;  break;
+        case 'w': case 'W': zinc = -setting.posInc;  break;
+        case 's': case 'S': zinc =  setting.posInc;  break;
 
-    case 13  : skill.toggle(); break;
-    case 27  : exit(1); break;
- }
+        case 13  : skill.toggle(); break;
+        case 27  : exit(1); break;
+     }
 
- world.move(xinc, yinc, zinc);
+     world.move(xinc, yinc, zinc);
 
- glutPostRedisplay();
+     glutPostRedisplay();
 }
 
 void mySpecialFunc(int key, int x, int y)
